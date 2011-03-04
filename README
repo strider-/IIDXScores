@@ -1,1 +1,1 @@
-beatmaniaIIDX score keeping program.  Currently only works on my development machine due to the fact that the primary SQL server is located there, but could easily be changed.
+beatmaniaIIDX score keeping program.  Currently only works on my development machine due to the fact that the primary SQL server is located there, along with the web service that returns data & accepts scores, but could easily be changed.
