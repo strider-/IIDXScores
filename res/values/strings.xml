@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">IIDX Scores</string><string name="preference_menu_text">Options</string>
+<string name="push_menu_text">Push Updates</string>
+<string name="pull_menu_text">Pull Data</string>
+
+
+<string name="style_prompt">Choose A Style</string>
+
+<string name="mode_prompt">Choose A Mode</string>
+<string name="dj_prompt">Choose A DJ</string>
+
+
+<string name="no_scores">No scores available.</string>
+<string name="generate_exscore">• Generate EX Score •</string>
+<color name="color_normal">#63B8FF</color>
+<color name="color_hyper">#ffa500</color>
+<color name="color_another">#ff0000</color>
+<color name="color_white">#fff</color>
+
+<string name="sorting_default">title</string>
+<string name="acincs_default">true</string>
+<string name="revivals_default">false</string>
+<string name="no_data">IIDX database not available!\nMenu -&gt; Pull Data to get started.</string>
+
+
+<string name="score_sorting_default">exscore</string>
+<string name="ssid_default">wireless warez</string>
+<string name="service_host_default">192.168.1.110</string>
+
+<string name="pull_address_format">http://%s:8000/MvcScoreService/Data/AllData/?json=true</string>
+<string name="push_address_format">http://%s:8000/MvcScoreService/Data/PushScores/</string>
+<string name="no_chart">There are no scores to chart.</string>
+<string name="geoscore_default">false</string>
+
+<string name="search_hint">Search for song</string>
+
+<string name="search_label">IIDX Song Search Results</string>
+<string name="app_desc">beatmaniaIIDX score keeping program</string>
+<string name="section_headers_default">true</string>
+</resources>

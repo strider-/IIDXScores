@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+
+    android:padding="6dip">
+
+    <ImageView
+        android:id="@+id/gradeIcon"
+
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="6dip"
+        
+        android:minWidth="75px"
+        android:scaleType="center"
+        android:src="@drawable/grade_aaa" />
+        
+    <TextView
+    	android:id="@+id/tvEXScore"
+        android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		
+        android:layout_toRightOf="@id/gradeIcon"
+        android:layout_alignParentTop="true"        
+        android:layout_alignWithParentIfMissing="true"
+
+        android:gravity="left"
+        android:text="1665" 
+        android:textSize="20sp"
+        android:textColor="@color/color_white" 
+        />
+    
+    <TextView
+    	android:id="@+id/tvAccuracy"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	
+    	android:layout_toRightOf="@id/tvEXScore"
+    	android:layout_alignParentRight="true"
+    	android:layout_alignParentTop="true"
+   	    android:layout_alignWithParentIfMissing="true"
+   	    
+    	android:gravity="right"
+    	android:text="87.4%"
+    	android:textSize="20sp"
+    	android:textColor="@color/color_white"
+    	>
+    </TextView>
+    
+    <TextView
+        android:id="@+id/tvStamp"
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+
+        android:layout_toRightOf="@id/gradeIcon"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+		android:layout_below="@id/tvEXScore"
+		
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:text="10/4/2009, 4:23 PM"/>
+
+
+</RelativeLayout>

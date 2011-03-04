@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/push" android:icon="@android:drawable/ic_menu_upload" android:title="@string/push_menu_text"></item><item android:id="@+id/pull" android:icon="@android:drawable/ic_menu_set_as" android:title="@string/pull_menu_text"></item>
+
+<item android:id="@+id/selectDJ" android:icon="@drawable/ic_menu_cc"></item><item android:id="@+id/mnuGPS" android:icon="@android:drawable/ic_menu_mylocation" android:visible="false" android:title="Get Location"></item><item android:id="@+id/preferences" android:icon="@android:drawable/ic_menu_preferences" android:title="@string/preference_menu_text"></item>
+
+
+
+
+
+
+
+
+
+
+</menu>

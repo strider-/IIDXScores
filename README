@@ -1,0 +1,1 @@
+beatmaniaIIDX score keeping program.  Currently only works on my development machine due to the fact that the primary SQL server is located there, but could easily be changed.

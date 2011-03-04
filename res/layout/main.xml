@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">    
+    <cx.ath.strider.iidx.ActionBarView 
+    	android:id="@+id/actionbar"    	
+    	android:layout_width="fill_parent" 
+    	android:layout_height="50dip" 
+   	/>
+	<TextView  
+		android:id="@+id/tvNoData" 
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent" 
+		android:textColor="@color/color_white"
+		android:gravity="center"
+		android:textSize="20sp" 
+		android:text="@string/no_data"
+		android:visibility="invisible">
+	</TextView>
+	<ListView
+		android:layout_height="fill_parent"
+		android:layout_width="fill_parent" 
+		android:id="@+id/lvSongs"
+		android:fastScrollEnabled="true"
+		android:cacheColorHint="#00000000">
+	</ListView>	
+</LinearLayout>

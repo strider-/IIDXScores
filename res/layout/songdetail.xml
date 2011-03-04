@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            
+            <!-- New Score Tab -->
+            <ScrollView android:id="@+id/tbNewScore"
+   			  android:layout_width="fill_parent"
+			  android:layout_height="fill_parent">
+			<TableLayout			  
+		   	  android:stretchColumns="1"
+			  android:layout_width="fill_parent"
+			  android:layout_height="fill_parent">			    
+				<TextView 
+					android:layout_height="wrap_content" 
+					android:textSize = "15sp" 
+					android:id="@+id/tvSong" 
+					android:gravity="center_horizontal" 
+					android:layout_width="fill_parent"
+				 	android:paddingBottom="15px">
+				</TextView>
+				<TableRow android:paddingBottom="15px">			
+					<Button 
+						android:id="@+id/btnAddScore"
+						android:text="Add Score" 
+						android:onClick="addScore"
+						android:layout_width="fill_parent" 
+						android:layout_height="fill_parent" />
+					<TableLayout android:paddingLeft="20px">
+						<TableRow android:paddingBottom="10px" android:layout_width="fill_parent">
+							<TextView
+								android:id="@+id/lblEXScore"
+								android:text="EX Score:"  android:paddingRight="15px"
+								/>
+			                <EditText android:id="@+id/txtEXScore"		                			
+		                              android:layout_width="wrap_content" android:layout_height="wrap_content"
+		                              android:background="@android:drawable/editbox_background"
+		                              android:layout_weight="6" android:inputType="number"/>				
+						</TableRow>
+						<TableRow  android:layout_width="fill_parent">
+							<TextView
+								android:id="@+id/lblArcadeScore"
+								android:text="Arcade Score:"  android:paddingRight="15px"
+								/>
+			                <EditText android:id="@+id/txtArcadeScore"
+		                              android:layout_width="wrap_content" android:layout_height="wrap_content"
+		                              android:background="@android:drawable/editbox_background"
+									  android:inputType="number"
+		                              android:layout_weight="6" />				
+						</TableRow>
+					</TableLayout>					
+				</TableRow>
+				<TextView 
+					android:id="@+id/tvSeparator"
+					android:text="@string/generate_exscore"
+					android:textColor="#fff"
+					android:textSize = "15sp"  
+					android:layout_width="fill_parent" 
+					android:gravity="center"
+					android:layout_height="20dip" >
+				</TextView>
+				<TableRow android:paddingTop="15px">			
+					<Button 
+						android:id="@+id/btnGenEX"
+						android:text="Generate" 
+						android:onClick="generateEXScore"
+						android:layout_width="fill_parent" 
+						android:layout_height="fill_parent" />
+					<TableLayout android:paddingLeft="20px">
+						<TableRow android:paddingBottom="10px" android:layout_width="fill_parent">
+							<TextView
+								android:id="@+id/lblJG"
+								android:text="Just Greats:"  android:paddingRight="15px"
+								/>
+			                <EditText android:id="@+id/txtJustGreats"		                			
+		                              android:layout_width="wrap_content" android:layout_height="wrap_content"
+		                              android:background="@android:drawable/editbox_background"
+		                              android:inputType="number"
+		                              android:layout_weight="6" />				
+						</TableRow>
+						<TableRow  android:layout_width="fill_parent">
+							<TextView
+								android:id="@+id/lblG"
+								android:text="Greats:"  android:paddingRight="15px"
+								/>
+			                <EditText android:id="@+id/txtGreats"
+		                              android:layout_width="wrap_content" android:layout_height="wrap_content"
+		                              android:background="@android:drawable/editbox_background"
+									  android:inputType="number"
+		                              android:layout_weight="6" />				
+						</TableRow>
+					</TableLayout>					
+				</TableRow>
+				<TextView 
+					android:id="@+id/lblLocation" 
+					android:layout_width="fill_parent" 
+					android:layout_height="fill_parent" 
+					android:paddingTop="25dip"					
+					android:gravity="center"
+					android:textColor="#eee"
+					android:textStyle="italic"
+					android:text=""						
+				/>		
+			</TableLayout>  
+			</ScrollView>   
+			
+			<!-- View Scores Tab -->
+			<RelativeLayout 
+				android:id="@+id/llScores"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content">
+				<TextView 
+					android:layout_height="wrap_content" 
+					android:textSize = "15sp" 
+					android:id="@+id/tvSong2" 
+					android:gravity="center_horizontal" 
+					android:layout_width="fill_parent"
+				 	android:paddingBottom="0px"> <!-- 15px -->
+				</TextView>				
+				<Button
+					android:id="@+id/btnSort"
+					android:layout_width="75dip"
+					android:layout_height="18dip"
+					android:gravity="center"
+					android:textSize="12sp"
+					android:textColor="#ffff"
+					android:layout_below="@id/tvSong2" 
+					android:background="@color/color_white"
+					android:layout_alignParentLeft="true"
+					android:onClick="toggleSort"
+				/>		
+				<TextView
+					android:id="@+id/txtSpacer"
+					android:layout_width="fill_parent"
+					android:layout_height="18dip"
+					android:layout_below="@id/tvSong2"  
+					android:layout_toRightOf="@+id/btnSort"
+				/>			
+				<Button
+					android:id="@+id/btnSortDirection"
+					android:layout_width="75dip"
+					android:layout_height="18dip"
+					android:gravity="center"
+					android:textSize="12sp"
+					android:textColor="#fff"
+					android:layout_below="@id/tvSong2" 
+					android:background="@color/color_hyper"
+					android:layout_alignParentRight="true"				
+					android:onClick="toggleSortOrder"
+				/>			
+				<ListView xmlns:android="http://schemas.android.com/apk/res/android" 
+					android:dividerHeight="1dip"
+					android:layout_below="@id/btnSort"
+				    android:id="@+id/lvScores"
+				    android:layout_width="fill_parent" 
+				    android:layout_height="wrap_content"
+				    android:numColumns="1"
+				    android:verticalSpacing="10dp"
+				    android:horizontalSpacing="10dp"
+				    android:columnWidth="90dp"
+				    android:stretchMode="columnWidth"
+				    android:gravity="center"
+				    android:scrollbars="vertical"
+				    android:scrollbarAlwaysDrawVerticalTrack="true"
+				/>
+				<TextView
+					android:id="@+id/txtNoScores"
+					android:layout_below="@+id/lvScores"
+					android:layout_height="wrap_content" 
+					android:textSize = "20sp"  
+					android:textColor="#ffffffff" 
+					android:gravity="center_horizontal" 
+					android:visibility="invisible"
+					android:layout_width="fill_parent" 
+					android:text="@string/no_scores">
+				</TextView>
+			</RelativeLayout>
+			
+			<!-- Chart Tab -->
+			<LinearLayout				
+  				xmlns:android="http://schemas.android.com/apk/res/android"
+  				android:id="@+id/scoreChart"
+  				android:layout_width="fill_parent"
+  				android:layout_height="fill_parent">
+				<TextView
+					android:id="@+id/txtNoChart"
+					android:textSize = "20sp"  
+					android:textColor="#ffffffff" 
+					android:visibility="gone"
+					android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:text="@string/no_chart" 
+					android:gravity="center_vertical|center_horizontal">
+				</TextView>
+			</LinearLayout>			
+        </FrameLayout>
+    </LinearLayout>
+</TabHost>
