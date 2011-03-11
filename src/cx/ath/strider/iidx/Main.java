@@ -226,7 +226,7 @@ public class Main extends Activity implements OnSharedPreferenceChangeListener  
     	String homeSsid = preferences.getString("ssid", Main.this.getResources().getString(R.string.ssid_default));
     	boolean enabled = wm.isWifiEnabled() && currentSsid != null && currentSsid.equalsIgnoreCase(homeSsid);
     	 
-    	//enabled=true;
+    	enabled=true;
     	menu.findItem(R.id.pull).setEnabled(enabled);
     	menu.findItem(R.id.push).setEnabled(enabled);
     	
