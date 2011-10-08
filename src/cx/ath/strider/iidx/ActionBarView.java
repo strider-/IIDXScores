@@ -1,5 +1,7 @@
 package cx.ath.strider.iidx;
 
+import cx.ath.strider.iidx.model.Mode;
+import cx.ath.strider.iidx.model.Style;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;

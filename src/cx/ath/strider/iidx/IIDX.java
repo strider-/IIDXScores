@@ -1,5 +1,7 @@
 package cx.ath.strider.iidx;
 
+import cx.ath.strider.iidx.model.IIDXModel;
+
 /*
  * Global application objects
  */

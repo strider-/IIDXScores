@@ -1,4 +1,5 @@
-package cx.ath.strider.iidx;
+package cx.ath.strider.iidx.model;
+
 
 public class SongQuery {
 	public int SongID;

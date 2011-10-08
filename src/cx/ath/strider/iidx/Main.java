@@ -1,7 +1,12 @@
 package cx.ath.strider.iidx;
 
+import cx.ath.strider.iidx.adapter.SongQueryAdapter;
+import cx.ath.strider.iidx.base.BaseActivity;
+import cx.ath.strider.iidx.model.DJ;
+import cx.ath.strider.iidx.model.IIDXModel;
+import cx.ath.strider.iidx.model.SongData;
+import cx.ath.strider.iidx.model.SongQuery;
 import android.net.wifi.WifiManager;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -24,7 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Main extends Activity implements OnSharedPreferenceChangeListener  {	
+public class Main extends BaseActivity implements OnSharedPreferenceChangeListener  {	
 	private SharedPreferences preferences;	
 	private ProgressDialog workinDialog, downloadinDialog;
 	private boolean goodPublish, goodPull;
@@ -40,13 +45,13 @@ public class Main extends Activity implements OnSharedPreferenceChangeListener  
         super.onCreate(savedInstanceState);
     	setContentView(R.layout.main);    	
     	
-    	bar = (ActionBarView)findViewById(R.id.actionbar);
+    	bar = getViewById(R.id.actionbar);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.registerOnSharedPreferenceChangeListener(this);                       
         IIDX.geoScore = new GeoScore(this);
         
         setGeo();
-        prepareModel();        
+        prepareModel();            
     }
     
     @Override
@@ -108,7 +113,7 @@ public class Main extends Activity implements OnSharedPreferenceChangeListener  
     
     private void prepareModel() {
     	IIDX.model = new IIDXModel(this);
-    	TextView tvNoData = (TextView)findViewById(R.id.tvNoData);
+    	TextView tvNoData = getViewById(R.id.tvNoData);
     	
         if(IIDX.model.getDatabaseExists()) {
         	bar.setVisibility(View.VISIBLE);
@@ -135,7 +140,7 @@ public class Main extends Activity implements OnSharedPreferenceChangeListener  
     	bar.setModeAdapter(IIDX.model.getModes());    	
     	bar.setOnCancelSearchMode(refresh);
     	
-        final ListView lvSongs = (ListView)findViewById(R.id.lvSongs); 
+        final ListView lvSongs = getViewById(R.id.lvSongs); 
         lvSongs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				setCurrentSong((SongQuery)arg0.getItemAtPosition(arg2));
@@ -243,7 +248,7 @@ public class Main extends Activity implements OnSharedPreferenceChangeListener  
     
     private void refreshSongList() {
     	if(IIDX.model.getDatabaseExists()) {
-	    	ListView lvSongs = ((ListView)findViewById(R.id.lvSongs));    	
+	    	ListView lvSongs = getViewById(R.id.lvSongs);    	
 	    	SongQueryAdapter adapter = (SongQueryAdapter)lvSongs.getAdapter();
 	    	SongQuery lastSong = null;
 	    	

@@ -1,5 +1,7 @@
-package cx.ath.strider.iidx;
+package cx.ath.strider.iidx.adapter;
 
+import cx.ath.strider.iidx.R;
+import cx.ath.strider.iidx.model.ScoreDetail;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

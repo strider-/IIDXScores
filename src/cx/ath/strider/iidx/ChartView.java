@@ -1,5 +1,6 @@
 package cx.ath.strider.iidx;
 
+import cx.ath.strider.iidx.model.ScoreDetail;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;

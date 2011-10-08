@@ -1,7 +1,8 @@
-package cx.ath.strider.iidx;
+package cx.ath.strider.iidx.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import cx.ath.strider.iidx.R;
 
 public class ScoreDetail implements Serializable {	
 	/**

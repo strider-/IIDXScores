@@ -1,7 +1,9 @@
-package cx.ath.strider.iidx;
+package cx.ath.strider.iidx.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
+
+import cx.ath.strider.iidx.ScoreComparer;
 
 public class SongData implements Serializable {
 	private static final long serialVersionUID = 7617686558808393723L;

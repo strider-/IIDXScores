@@ -1,15 +1,14 @@
-package cx.ath.strider.iidx;
+package cx.ath.strider.iidx.adapter;
 
-//import java.util.Arrays;
-//import java.util.HashMap;
 import java.util.ArrayList;
+
+import cx.ath.strider.iidx.R;
+import cx.ath.strider.iidx.model.SongQuery;
 import android.content.Context;
-//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-//import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 // I'd LOVE to have a character preview with the fast scrolling, but there are some serious

@@ -1,6 +1,8 @@
-package cx.ath.strider.iidx;
+package cx.ath.strider.iidx.adapter;
 
 import java.util.ArrayList;
+
+import cx.ath.strider.iidx.model.Mode;
 
 import android.content.Context;
 import android.view.View;

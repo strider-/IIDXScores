@@ -1,5 +1,9 @@
 package cx.ath.strider.iidx;
 
+import cx.ath.strider.iidx.adapter.ScoreAdapter;
+import cx.ath.strider.iidx.model.DJ;
+import cx.ath.strider.iidx.model.SongData;
+import cx.ath.strider.iidx.model.SongQuery;
 import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.SharedPreferences;
@@ -51,18 +55,18 @@ public class SongDetail extends TabActivity {
 		IIDX.geoScore.onInitialFix(r);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);			
 		
-		txtEXScore = (EditText)findViewById(R.id.txtEXScore);
-		txtArcadeScore = (EditText)findViewById(R.id.txtArcadeScore);
-		txtGreats = (EditText)findViewById(R.id.txtGreats);
-		txtJustGreats = (EditText)findViewById(R.id.txtJustGreats);
-		lvScores = (ListView)findViewById(R.id.lvScores);													
-		btnSort = (Button)findViewById(R.id.btnSort);
-		btnSortDirection = (Button)findViewById(R.id.btnSortDirection);		
-		tvSong  = (TextView)findViewById(R.id.tvSong);
-		tvSong2 = (TextView)findViewById(R.id.tvSong2);		
-		txtSpacer = (TextView)findViewById(R.id.txtSpacer);				   		
-   		btnAddScore = (Button)findViewById(R.id.btnAddScore);
-   		lblLocation = (TextView)findViewById(R.id.lblLocation);
+		txtEXScore = getViewById(R.id.txtEXScore);
+		txtArcadeScore = getViewById(R.id.txtArcadeScore);
+		txtGreats = getViewById(R.id.txtGreats);
+		txtJustGreats = getViewById(R.id.txtJustGreats);
+		lvScores = getViewById(R.id.lvScores);													
+		btnSort = getViewById(R.id.btnSort);
+		btnSortDirection = getViewById(R.id.btnSortDirection);		
+		tvSong  = getViewById(R.id.tvSong);
+		tvSong2 = getViewById(R.id.tvSong2);		
+		txtSpacer = getViewById(R.id.txtSpacer);				   		
+   		btnAddScore = getViewById(R.id.btnAddScore);
+   		lblLocation = getViewById(R.id.lblLocation);
    		
    		cv = new ChartView(this);
 		((LinearLayout)findViewById(R.id.scoreChart))
@@ -199,6 +203,10 @@ public class SongDetail extends TabActivity {
 		
 		bindScores();
 	}
+	@SuppressWarnings("unchecked")	
+	protected <T extends View> T getViewById(int id) {
+		return (T)findViewById(id);
+	}	
 	private void bindScores() {
 		boolean byEXScore = getScoreSort().equals("exscore"),
 		        asc = getScoreSortOrder();

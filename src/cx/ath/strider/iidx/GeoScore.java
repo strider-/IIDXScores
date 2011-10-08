@@ -69,7 +69,6 @@ public class GeoScore implements LocationListener {
 			else
 				address = null;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		
@@ -77,7 +76,7 @@ public class GeoScore implements LocationListener {
 			onGotFix.run();
 			init=false;
 		}
-	}	
+	}
 
 	@Override
 	public void onProviderDisabled(String provider) {

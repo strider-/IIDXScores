@@ -2,6 +2,9 @@ package cx.ath.strider.iidx;
 
 import java.util.Date;
 
+import cx.ath.strider.iidx.model.Mode;
+import cx.ath.strider.iidx.model.Style;
+
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;

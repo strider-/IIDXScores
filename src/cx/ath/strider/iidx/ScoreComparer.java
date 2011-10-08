@@ -2,6 +2,8 @@ package cx.ath.strider.iidx;
 
 import java.util.Comparator;
 
+import cx.ath.strider.iidx.model.ScoreDetail;
+
 public class ScoreComparer implements Comparator<ScoreDetail> {
 	private boolean exSort, asc;
 	

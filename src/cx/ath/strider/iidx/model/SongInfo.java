@@ -1,4 +1,4 @@
-package cx.ath.strider.iidx;
+package cx.ath.strider.iidx.model;
 
 import java.io.Serializable;
 

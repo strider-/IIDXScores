@@ -1,4 +1,4 @@
-package cx.ath.strider.iidx;
+package cx.ath.strider.iidx.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +13,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import cx.ath.strider.iidx.IIDX;
+import cx.ath.strider.iidx.JsonHandler;
+import cx.ath.strider.iidx.R;
+import cx.ath.strider.iidx.adapter.ModeAdapter;
+import cx.ath.strider.iidx.adapter.SongQueryAdapter;
 
 import android.content.ContentValues;
 import android.content.Context;
