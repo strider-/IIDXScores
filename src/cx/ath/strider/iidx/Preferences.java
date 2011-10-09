@@ -21,9 +21,11 @@ public class Preferences extends PreferenceActivity {
 		Preference mpd = findPreference("min_push_date"),
 		           defaultParent = findPreference("defaults_screen");
 		
+		Settings settings = new Settings(getApplicationContext());
+		
 		defaultParent.setEnabled(IIDX.model.getDatabaseExists());
 		if(IIDX.model.getDatabaseExists()) {		
-			long rawDate = this.getPreferenceManager().getSharedPreferences().getLong("min_push_date", System.currentTimeMillis());
+			long rawDate = settings.getMinPushDate();
 						
 			mpd.setTitle(String.format(mpd.getTitle().toString(), IIDX.model.getNewScoreCount(rawDate)));
 			mpd.setSummary(String.format(mpd.getSummary().toString(), new Date(rawDate).toLocaleString()));			

@@ -3,8 +3,7 @@ package cx.ath.strider.iidx.base;
 import android.app.Activity;
 import android.view.View;
 
-public abstract class BaseActivity extends Activity {
-	
+public abstract class BaseActivity extends Activity {	
 	/**
 	 * Generic method of findViewById
 	 * @param <T> Type to return, must be a subclass of View.

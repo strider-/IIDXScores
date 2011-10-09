@@ -353,7 +353,6 @@ public class IIDXModel extends JsonHandler {
 			return -1;		
 
 		Cursor c = null;
-		// long minPushDate = Main.getMinPushDate();
 		String q = String.format("select count(scoreid) from scores where stamp >= %d", since);
 		
 		try {
@@ -457,8 +456,7 @@ public class IIDXModel extends JsonHandler {
 		StringBuffer buffer = new StringBuffer();
 		Cursor c = null;
 		
-		try {
-			// long minPushDate = Main.getMinPushDate();			
+		try {	
 			String q = String.format("select * from scores where stamp >= %d", since);
 			JSONArray scores = new JSONArray();
 			

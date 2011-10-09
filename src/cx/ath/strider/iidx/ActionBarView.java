@@ -4,8 +4,6 @@ import cx.ath.strider.iidx.model.Mode;
 import cx.ath.strider.iidx.model.Style;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -30,7 +28,7 @@ public class ActionBarView extends RelativeLayout {
 	private Style currentStyle;
 	private Mode currentMode;
 	private Runnable onChange, onSearchChange, onCancelSearchMode;
-	private SharedPreferences prefs;
+	private Settings settings;
 	private boolean searchMode;
 	private String currentSearch;
 	private Animation slide;
@@ -50,7 +48,8 @@ public class ActionBarView extends RelativeLayout {
 			inflater.inflate(R.layout.actionbar, this);
 			
 			kbd = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-			prefs = PreferenceManager.getDefaultSharedPreferences(context);
+			settings = new Settings(context);
+			
 			listener = new Animation.AnimationListener() {	
 				@Override
 				public void onAnimationRepeat(Animation animation) {
@@ -155,9 +154,9 @@ public class ActionBarView extends RelativeLayout {
 		public void onClick(View v) {
 			// the preference has a listener set up in Main for preference changes, no need to call onChange
 			if(getSort().equals("title")) {
-				prefs.edit().putString("sorting", "difficulty,title").commit();
+				settings.setSongListSort("difficulty,title");
 			} else {
-				prefs.edit().putString("sorting", "title").commit();
+				settings.setSongListSort("title");
 			}
 			
 			setSortText();
@@ -201,7 +200,7 @@ public class ActionBarView extends RelativeLayout {
 		btnABSort.setText(getSort().equals("title") ? "a-z" : "\u2605");
 	}
 	private String getSort() {		
-		return prefs.getString("sorting", getContext().getResources().getString(R.string.sorting_default));
+		return settings.getSongListSort();
 	}
 	public void setOnChange(Runnable r) {
 		onChange = r;

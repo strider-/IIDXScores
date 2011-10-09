@@ -11,7 +11,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Context;
@@ -30,7 +29,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Main extends BaseActivity implements OnSharedPreferenceChangeListener  {	
-	private SharedPreferences preferences;	
+	private Settings settings;
+	
 	private ProgressDialog workinDialog, downloadinDialog;
 	private boolean goodPublish, goodPull;
 	private final Handler mHandler = new Handler(),
@@ -43,11 +43,11 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    	setContentView(R.layout.main);    	
+    	setContentView(R.layout.main);
     	
     	bar = getViewById(R.id.actionbar);
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.registerOnSharedPreferenceChangeListener(this);                       
+    	settings = new Settings(getApplicationContext());
+        settings.registerSettingsChangeListener(this);                       
         IIDX.geoScore = new GeoScore(this);
         
         setGeo();
@@ -62,7 +62,7 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
     
     @Override
     public void onDestroy() {
-    	preferences.unregisterOnSharedPreferenceChangeListener(this);
+    	settings.unregisterSettingsChangeListener(this);
     	IIDX.geoScore.Disable();
     	super.onDestroy();
     }
@@ -95,7 +95,7 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
     }
         
     private void setGeo() {    	    	   
-    	boolean enabled = preferences.getBoolean("geoscore", false);
+    	boolean enabled = settings.getGeoScoreEnabled();
     	
     	if(enabled) {
     		if(!IIDX.geoScore.hasLocation() && this.getLastNonConfigurationInstance() != null)
@@ -194,8 +194,8 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
         	bar.setMode(state.Mode);
         	currentDJ = state.DJ;        	        	
         } else {
-        	bar.setStyle(IIDX.model.getStyleFromID(Integer.valueOf(preferences.getString("default_style", "0"))));
-        	bar.setMode(IIDX.model.getModeFromID(Integer.valueOf(preferences.getString("default_mode", "0"))));
+        	bar.setStyle(IIDX.model.getStyleFromID(settings.getDefaultStyle()));
+        	bar.setMode(IIDX.model.getModeFromID(settings.getDefaultMode()));
             currentDJ = IIDX.model.getDJs().getItem(0);
         }
         
@@ -206,7 +206,7 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
     	CurrentSong = IIDX.model.getSongData(
     				  	song, 
     				  	currentDJ, 
-    				  	preferences.getString("score_sorting", getResources().getString(R.string.score_sorting_default))
+    				  	settings.getScoreSort()
 	  	);
     }
     private void openDetail(int tabIndex) {    	
@@ -228,7 +228,7 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
     public boolean onPrepareOptionsMenu(Menu menu) {
     	WifiManager wm = (WifiManager)this.getSystemService(Context.WIFI_SERVICE);
     	String currentSsid = wm.getConnectionInfo().getSSID();
-    	String homeSsid = preferences.getString("ssid", Main.this.getResources().getString(R.string.ssid_default));
+    	String homeSsid = settings.getSsid();
     	boolean enabled = wm.isWifiEnabled() && currentSsid != null && currentSsid.equalsIgnoreCase(homeSsid);
     	 
     	enabled=true;
@@ -260,10 +260,10 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
 			lvSongs.setAdapter(adapter = IIDX.model.getSongs(
 					bar.getStyle(),
 					bar.getMode(),
-					preferences.getString("sorting", Main.this.getResources().getString(R.string.sorting_default)), 
-					preferences.getBoolean("acincs", Boolean.valueOf(Main.this.getResources().getString(R.string.acincs_default))), 
-					preferences.getBoolean("revivals", Boolean.valueOf(Main.this.getResources().getString(R.string.revivals_default))),
-					preferences.getBoolean("section_headers", Boolean.valueOf(getResources().getString(R.string.section_headers_default)))
+					settings.getSongListSort(), 
+					settings.getShowACinCS(), 
+					settings.getIncludeRevivals(),
+					settings.getShowSectionHeaders()
 			));
 			//lvSongs.setFastScrollEnabled(true);
 			//LinearLayout grid = (LinearLayout)lvSongs.getParent();
@@ -278,7 +278,7 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
     public boolean onOptionsItemSelected(MenuItem item) {  	
     	switch(item.getItemId()) {
     	case R.id.push:
-    		int scoreCount = IIDX.model.getNewScoreCount(getMinPushDate());
+    		int scoreCount = IIDX.model.getNewScoreCount(settings.getMinPushDate());
     		if(IIDX.model.getDatabaseExists() && scoreCount > 0) {
     			showPromptDialog(
 					String.format("Push %d new score(s) to the local service?", scoreCount),
@@ -342,14 +342,6 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
 		 .setIcon(R.drawable.icon)
 		 .show();
     }    
-    private String getPullAddress() {
-    	String host = preferences.getString("service_host", getResources().getString(R.string.service_host_default));
-    	return String.format(getResources().getString(R.string.pull_address_format), host);	
-    }
-    private String getPushAddress() {
-    	String host = preferences.getString("service_host", getResources().getString(R.string.service_host_default));
-    	return String.format(getResources().getString(R.string.push_address_format), host);
-    }
         
     private OnClickListener pullClickListener = new OnClickListener() {
         @Override
@@ -383,14 +375,14 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
         					}
         				});
         				
-        	    		goodPull = data.fetchData(getPullAddress());
+        	    		goodPull = data.fetchData(settings.getPullAddress());
         	    		
         	    		mHandler.post(new Runnable(){
         	    			public void run() {        	    				
         	    				workinDialog.dismiss();
         	    				Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         	    				if(goodPull)
-        	    					setMinPushDate();
+        	    					settings.setMinPushDate();
         	    				else
         	    					showMsgDialog("Failed to obtain IIDX data!", "Error");
         	    				prepareModel();
@@ -413,14 +405,14 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
         		workinDialog = ProgressDialog.show(Main.this, "", "Uploading scores...");
         		Thread t = new Thread() {
         			public void run() {
-        				goodPublish = IIDX.model.updateHost(getPushAddress(), getMinPushDate());
+        				goodPublish = IIDX.model.updateHost(settings.getPushAddress(), settings.getMinPushDate());
         				
         				mHandler.post(new Runnable() {
         					public void run() {
         						workinDialog.dismiss();
         						Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         						if(goodPublish) {
-        							setMinPushDate();
+        							settings.setMinPushDate();
         							Toast.makeText(Main.this, "Scores published.", Toast.LENGTH_LONG).show();
         						} else
         							showMsgDialog("Failed to publish scores!", "Error");
@@ -433,13 +425,4 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
             }
         }
     };
-    
-    public void setMinPushDate() {
-    	preferences.edit().putLong("min_push_date", 
-			System.currentTimeMillis()
-    	).commit();
-    }
-    public long getMinPushDate() {
-    	return preferences.getLong("min_push_date", System.currentTimeMillis());
-    }
 }

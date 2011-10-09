@@ -6,9 +6,7 @@ import cx.ath.strider.iidx.model.SongData;
 import cx.ath.strider.iidx.model.SongQuery;
 import android.app.AlertDialog;
 import android.app.TabActivity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +24,7 @@ public class SongDetail extends TabActivity {
 	private Button btnAddScore, btnSort, btnSortDirection;
 	private ListView lvScores;
 	private TextView lblLocation, txtSpacer, tvSong, tvSong2;
-	private SharedPreferences prefs;
+	private Settings settings;
 	private ScoreAdapter sa;
 	private EditText txtEXScore, txtArcadeScore, txtGreats, txtJustGreats;
 	private ChartView cv;
@@ -51,7 +49,7 @@ public class SongDetail extends TabActivity {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.songdetail);
 		
-		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		settings = new Settings(getApplicationContext());		
 		IIDX.geoScore.onInitialFix(r);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);			
 		
@@ -138,7 +136,7 @@ public class SongDetail extends TabActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
     	for(SongQuery song : songModes) {
     		if(item.getItemId() == song.Mode.ModeID) {
-    			this.setSong(IIDX.model.getSongData(song, currentDJ, getScoreSort()));
+    			this.setSong(IIDX.model.getSongData(song, currentDJ, settings.getScoreSort()));
     			break;
     		}
     	}
@@ -186,21 +184,16 @@ public class SongDetail extends TabActivity {
 	}
 	
 	public void toggleSort(View v) {				
-		if(getScoreSort().equals("exscore")) {
-			prefs.edit().putString("score_sorting", "stamp").commit();
+		if(settings.getScoreSort().equals("exscore")) {
+			settings.setScoreSort("stamp");
 		} else {
-			prefs.edit().putString("score_sorting", "exscore").commit();
+			settings.setScoreSort("exscore");
 		}		
 				
 		bindScores();
 	}
 	public void toggleSortOrder(View v) {
-		if(getScoreSortOrder()) {
-			prefs.edit().putBoolean("score_sorting_order", false).commit();
-		} else {
-			prefs.edit().putBoolean("score_sorting_order", true).commit();
-		}
-		
+		settings.setScoreSortOrder(!settings.isScoreSortOrderAscending());		
 		bindScores();
 	}
 	@SuppressWarnings("unchecked")	
@@ -208,8 +201,8 @@ public class SongDetail extends TabActivity {
 		return (T)findViewById(id);
 	}	
 	private void bindScores() {
-		boolean byEXScore = getScoreSort().equals("exscore"),
-		        asc = getScoreSortOrder();
+		boolean byEXScore = settings.getScoreSort().equals("exscore"),
+		        asc = settings.isScoreSortOrderAscending();
 		workingSong.sortScores(byEXScore, asc);
    		sa = new ScoreAdapter(this, workingSong.Scores);
    		lvScores.setAdapter(sa);
@@ -239,12 +232,7 @@ public class SongDetail extends TabActivity {
    			((TextView)findViewById(R.id.txtNoChart)).setVisibility(View.GONE);			
    		}   		
 	}
-	private String getScoreSort() {
-		return prefs.getString("score_sorting", getResources().getString(R.string.score_sorting_default));
-	}
-	private boolean getScoreSortOrder() {
-		return prefs.getBoolean("score_sorting_order", false);
-	}
+
 	private void setAddressText() {
 		lblLocation.setText(String.format("%s, %s",
 			IIDX.geoScore.getAddress().getLocality(),
