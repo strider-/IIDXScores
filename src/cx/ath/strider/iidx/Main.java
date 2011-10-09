@@ -51,7 +51,7 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
         IIDX.geoScore = new GeoScore(this);
         
         setGeo();
-        prepareModel();            
+        prepareModel();
     }
     
     @Override
@@ -126,9 +126,12 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
     }
     
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		if(key.equals("sorting") || key.equals("acincs") || key.equals("revivals") || key.equals("section_headers"))
+		if(key.equals(Settings.KEY_SONGLIST_SORT) || 
+		   key.equals(Settings.KEY_ARCADE_IN_CONSUMER) || 
+		   key.equals(Settings.KEY_REVIVALS) || 
+		   key.equals(Settings.KEY_SECTION_HEADERS))			
 			refreshSongList();
-		else if(key.equals("geoscore"))
+		else if(key.equals(Settings.KEY_GEOSCORE))
 			setGeo();
 	}
         

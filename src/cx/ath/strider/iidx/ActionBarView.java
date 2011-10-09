@@ -153,10 +153,10 @@ public class ActionBarView extends RelativeLayout {
 		@Override
 		public void onClick(View v) {
 			// the preference has a listener set up in Main for preference changes, no need to call onChange
-			if(getSort().equals("title")) {
-				settings.setSongListSort("difficulty,title");
+			if(settings.getSongListSort().equals("title")) {
+				settings.setSongListSortBy("difficulty,title");
 			} else {
-				settings.setSongListSort("title");
+				settings.setSongListSortBy("title");
 			}
 			
 			setSortText();
@@ -197,11 +197,8 @@ public class ActionBarView extends RelativeLayout {
 		kbd.showSoftInput(txtABSearch, 0);
 	}
 	private void setSortText() {
-		btnABSort.setText(getSort().equals("title") ? "a-z" : "\u2605");
-	}
-	private String getSort() {		
-		return settings.getSongListSort();
-	}
+		btnABSort.setText(settings.getSongListSort().equals("title") ? "a-z" : "\u2605");
+	}	
 	public void setOnChange(Runnable r) {
 		onChange = r;
 	}
