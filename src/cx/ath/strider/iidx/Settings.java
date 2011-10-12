@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
  *
  */
 public class Settings {
+	public static final String DEBUG_TAG = "IIDX";
 	public static final String KEY_GEOSCORE = "geoscore";
 	public static final String KEY_DEFAULT_STYLE = "default_style";
 	public static final String KEY_DEFAULT_MODE = "default_mode";	
