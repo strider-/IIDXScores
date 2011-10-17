@@ -73,17 +73,17 @@ public class SongDetail extends TabActivity {
 		TabHost mTabHost = getTabHost();
 		mTabHost.addTab(mTabHost
 				.newTabSpec("tab1")
-				.setIndicator("New Score", getResources().getDrawable(R.drawable.new_score))
+				.setIndicator("New Score", settings.getNewScoreIcon())
 				.setContent(R.id.tbNewScore)
 		);
    		mTabHost.addTab(mTabHost
    				.newTabSpec("tab2")
-   				.setIndicator("View Scores", getResources().getDrawable(R.drawable.view_scores))
+   				.setIndicator("View Scores", settings.getViewScoresIcon())
    				.setContent(R.id.llScores)
 		);
    		mTabHost.addTab(mTabHost
    				.newTabSpec("tab3")
-   				.setIndicator("Score Chart", getResources().getDrawable(R.drawable.chart))
+   				.setIndicator("Score Chart", settings.getScoreChartIcon())
    				.setContent(R.id.scoreChart)
 		);   		
    		

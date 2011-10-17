@@ -49,7 +49,7 @@ public class IIDXHandler extends JsonHandler {
 			
 			createIndexes();			
 		} catch(SQLException e) {
-			Log.e("Error", "Database Creation or Opening", e);
+			Log.e(Settings.DEBUG_TAG, "Database Creation or Opening", e);
 		}
 	}
 	
@@ -83,7 +83,7 @@ public class IIDXHandler extends JsonHandler {
 	    		db.execSQL(indexes[i]);
 	    	}
     	} catch(SQLException e) {
-    		Log.e("Error", "Failed to create indexes.", e);
+    		Log.e(Settings.DEBUG_TAG, "Failed to create indexes.", e);
     	}
     }
 	
@@ -96,7 +96,7 @@ public class IIDXHandler extends JsonHandler {
 			HttpConnectionParams.setSoTimeout(client.getParams(), 10000);			
 			HttpResponse response = client.execute(get);
 
-			Log.i("IIDX", "Downloading JSON");			
+			Log.i(Settings.DEBUG_TAG, "Downloading JSON");			
 			String raw = getJsonString(response.getEntity().getContent());
 			JSONObject json = new JSONObject(raw);
 			
@@ -108,7 +108,7 @@ public class IIDXHandler extends JsonHandler {
 						  iidx.getJSONArray("Songs").length() +
 						  iidx.getJSONArray("Scores").length() +
 						  iidx.getJSONArray("CSRevivals").length();
-			Log.i("IIDX", "Item Count: " + maxProgress);
+			Log.i(Settings.DEBUG_TAG, "Item Count: " + maxProgress);
 			
 			populateDJs(iidx.getJSONArray("DJs"));
 			populateModes(iidx.getJSONArray("Modes"));
@@ -120,22 +120,22 @@ public class IIDXHandler extends JsonHandler {
 			
 			return true;
 		} catch(ClientProtocolException e) {
-			Log.e("ERROR", "ClientProtocolException", e);
+			Log.e(Settings.DEBUG_TAG, "ClientProtocolException", e);
 			context.deleteDatabase(IIDX.DATABASE_NAME);
 			return false;
 		} catch(SQLException e) {
-			Log.e("ERROR", "SQLException", e);
+			Log.e(Settings.DEBUG_TAG, "SQLException", e);
 			context.deleteDatabase(IIDX.DATABASE_NAME);
 			return false;
 		} catch(JSONException e) {
-			Log.e("ERROR", "SAXException", e);
+			Log.e(Settings.DEBUG_TAG, "SAXException", e);
 			context.deleteDatabase(IIDX.DATABASE_NAME);
 			return false;
 		} catch (IOException e) {
-			Log.e("ERROR", "IOException", e);
+			Log.e(Settings.DEBUG_TAG, "IOException", e);
 			return false;
 		} finally {
-			Log.i("IIDX", "Data pull complete");
+			Log.i(Settings.DEBUG_TAG, "Data pull complete");
 			db.close();
 		}
     }
@@ -151,7 +151,7 @@ public class IIDXHandler extends JsonHandler {
     }
     
     private void populateDJs(JSONArray djs) throws JSONException {
-    	Log.i("IIDX", "Populating DJs");		
+    	Log.i(Settings.DEBUG_TAG, "Populating DJs");		
     	for(int i=0; i<djs.length(); i++) {
     		incrementProgress("Populating DJs");
     		JSONObject obj = djs.getJSONObject(i);
@@ -164,7 +164,7 @@ public class IIDXHandler extends JsonHandler {
     	}
     }
     private void populateModes(JSONArray modes) throws JSONException {
-    	Log.i("IIDX", "Populating Modes");
+    	Log.i(Settings.DEBUG_TAG, "Populating Modes");
     	for(int i=0; i<modes.length(); i++) {
     		incrementProgress("Populating Modes");
     		JSONObject obj = modes.getJSONObject(i);
@@ -176,7 +176,7 @@ public class IIDXHandler extends JsonHandler {
     	}
     }
     private void populateStyles(JSONArray styles) throws JSONException {
-    	Log.i("IIDX", "Populating Styles");
+    	Log.i(Settings.DEBUG_TAG, "Populating Styles");
     	for(int i=0; i<styles.length(); i++) {
     		incrementProgress("Populating Styles");
     		JSONObject obj = styles.getJSONObject(i);
@@ -190,7 +190,7 @@ public class IIDXHandler extends JsonHandler {
     	}
     }
 	private void populateSongInfo(JSONArray songinfo) throws JSONException {
-		Log.i("IIDX", "Populating SongInfo");
+		Log.i(Settings.DEBUG_TAG, "Populating SongInfo");
     	for(int i=0; i<songinfo.length(); i++) {
     		incrementProgress("Populating Song Info");
     		JSONObject obj = songinfo.getJSONObject(i);
@@ -206,7 +206,7 @@ public class IIDXHandler extends JsonHandler {
     	}
 	}
     private void populateSongs(JSONArray songs) throws JSONException {
-    	Log.i("IIDX", "Populating Songs");
+    	Log.i(Settings.DEBUG_TAG, "Populating Songs");
     	for(int i=0; i<songs.length(); i++) {
     		incrementProgress("Populating Songs");
     		JSONObject obj = songs.getJSONObject(i);
@@ -220,7 +220,7 @@ public class IIDXHandler extends JsonHandler {
     	}
     }
     private void populateScores(JSONArray scores) throws JSONException {
-    	Log.i("IIDX", "Populating Scores");
+    	Log.i(Settings.DEBUG_TAG, "Populating Scores");
     	for(int i=0; i<scores.length(); i++) {
     		incrementProgress("Populating Scores");
     		JSONObject obj = scores.getJSONObject(i);
@@ -241,7 +241,7 @@ public class IIDXHandler extends JsonHandler {
     	}
     }
     private void populateRevivals(JSONArray revivals) throws JSONException {
-    	Log.i("IIDX", "Populating Revivals");
+    	Log.i(Settings.DEBUG_TAG, "Populating Revivals");
     	for(int i=0; i<revivals.length(); i++) {
     		incrementProgress("Populating Revivals");
     		JSONObject obj = revivals.getJSONObject(i);

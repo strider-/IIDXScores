@@ -3,6 +3,7 @@ package cx.ath.strider.iidx;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 
 /**
@@ -24,6 +25,7 @@ public class Settings {
 	public static final String KEY_SECTION_HEADERS = "section_headers";
 	public static final String KEY_REMOTE_REPOSITORY = "service_host";
 	public static final String KEY_LAST_PUSH_DATE = "min_push_date";
+	public static final String KEY_SHOW_SPLASHSCREEN = "show_splash";
 	
 	private SharedPreferences prefs;
 	private Context context;
@@ -34,6 +36,7 @@ public class Settings {
 	 */
 	public Settings(Context context) {
 		this.context = context;
+		
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
 	}
 	
@@ -51,6 +54,10 @@ public class Settings {
 	 */
 	public void unregisterSettingsChangeListener(OnSharedPreferenceChangeListener listener) {
 		prefs.unregisterOnSharedPreferenceChangeListener(listener);
+	}
+	
+	public boolean showSplashScreen() {
+		return prefs.getBoolean(KEY_SHOW_SPLASHSCREEN, true);
 	}
 	
 	/**
@@ -196,5 +203,29 @@ public class Settings {
     	prefs.edit()
     		.putLong(KEY_LAST_PUSH_DATE, System.currentTimeMillis())
 		.commit();
+	}
+	
+	/**
+	 * Returns the icon for viewing scores
+	 * @return Drawable resource
+	 */
+	public Drawable getViewScoresIcon() {
+		return context.getResources().getDrawable(R.drawable.view_scores);
+	}
+	
+	/**
+	 * Returns the icon for the score chart
+	 * @return Drawable resource
+	 */
+	public Drawable getScoreChartIcon() {
+		return context.getResources().getDrawable(R.drawable.chart);
+	}
+	
+	/**
+	 * Returns the icon for new scores
+	 * @return Drawable resource
+	 */
+	public Drawable getNewScoreIcon() {
+		return context.getResources().getDrawable(R.drawable.new_score);
 	}
 }

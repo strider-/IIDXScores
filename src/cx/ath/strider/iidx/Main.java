@@ -47,7 +47,7 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
     	
     	bar = getViewById(R.id.actionbar);
     	settings = new Settings(getApplicationContext());
-        settings.registerSettingsChangeListener(this);                       
+        settings.registerSettingsChangeListener(this);
         IIDX.geoScore = new GeoScore(this);
         
         setGeo();
@@ -159,7 +159,7 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
 				a.setTitle(String.valueOf(CurrentSong.Scores.length) + " Score");
 				if(CurrentSong.Scores.length != 1)
 					a.setTitle(a.getTitle() + "s");
-				a.setIcon(Main.this.getResources().getDrawable(R.drawable.view_scores));
+				a.setIcon(settings.getViewScoresIcon());
 				a.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {						
 						openDetail(1);
@@ -170,7 +170,7 @@ public class Main extends BaseActivity implements OnSharedPreferenceChangeListen
 				if(CurrentSong.Scores.length > 0) {
 					ActionItem b = new ActionItem();
 					b.setTitle("Score Chart");
-					b.setIcon(Main.this.getResources().getDrawable(R.drawable.chart));
+					b.setIcon(settings.getScoreChartIcon());
 					b.setOnClickListener(new View.OnClickListener() {
 						public void onClick(View v) {
 							openDetail(2);

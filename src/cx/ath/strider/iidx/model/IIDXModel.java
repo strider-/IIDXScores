@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import cx.ath.strider.iidx.IIDX;
 import cx.ath.strider.iidx.JsonHandler;
 import cx.ath.strider.iidx.R;
+import cx.ath.strider.iidx.Settings;
 import cx.ath.strider.iidx.adapter.ModeAdapter;
 import cx.ath.strider.iidx.adapter.SongQueryAdapter;
 
@@ -65,7 +66,7 @@ public class IIDXModel extends JsonHandler {
 			c.close();
 			return aa;
 		} catch(SQLException e) {
-			Log.e("Error", "Failed retrieving Styles from SQLite", e);
+			Log.e(Settings.DEBUG_TAG, "Failed retrieving Styles from SQLite", e);
 			return null;
 		} finally {
 			if(c != null)
@@ -97,7 +98,7 @@ public class IIDXModel extends JsonHandler {
 			ma.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 			return ma;
 		} catch(SQLException e) {
-			Log.e("Error", "Failed retrieving Modes from SQLite", e);
+			Log.e(Settings.DEBUG_TAG, "Failed retrieving Modes from SQLite", e);
 			return null;
 		} finally {
 			if(c!=null)
@@ -124,7 +125,7 @@ public class IIDXModel extends JsonHandler {
 			c.close();						
 			return aa;
 		} catch(SQLException e) {
-			Log.e("Error", "Failed retrieving DJs from SQLite", e);
+			Log.e(Settings.DEBUG_TAG, "Failed retrieving DJs from SQLite", e);
 			return null;
 		} finally {
 			if(c!=null)
@@ -207,7 +208,7 @@ public class IIDXModel extends JsonHandler {
 			
 			return new SongQueryAdapter(this.context, R.layout.songlist_layout_item, aa, sort);
 		} catch(SQLException e) {
-			Log.e("Error", "Failed querying for Songs from SQLite", e);
+			Log.e(Settings.DEBUG_TAG, "Failed querying for Songs from SQLite", e);
 			return null;
 		} finally {
 			if(c != null)
@@ -249,7 +250,7 @@ public class IIDXModel extends JsonHandler {
 			c.close();			
 			return songs;
 		} catch(SQLException e) {
-			Log.e("Error", "Failed retrieving SongData from SQLite", e);
+			Log.e(Settings.DEBUG_TAG, "Failed retrieving SongData from SQLite", e);
 			return null;
 		} finally {
 			if(c != null)
@@ -319,7 +320,7 @@ public class IIDXModel extends JsonHandler {
 			c.close();
 			return s;
 		} catch(SQLException e) {
-			Log.e("Error", "Failed retrieving SongData from SQLite", e);
+			Log.e(Settings.DEBUG_TAG, "Failed retrieving SongData from SQLite", e);
 			return null;
 		} finally {
 			if(c != null)
@@ -342,7 +343,7 @@ public class IIDXModel extends JsonHandler {
 			values.put("lon", lon);
 			return db.insert("Scores", null, values) != -1;
 		} catch(SQLException e) {
-			Log.e("Error", "Failed inserting Score into SQLite", e);
+			Log.e(Settings.DEBUG_TAG, "Failed inserting Score into SQLite", e);
 			return false;
 		} finally {
 			this.close();
@@ -360,7 +361,7 @@ public class IIDXModel extends JsonHandler {
 			c.moveToFirst();
 			return c.getInt(0);
 		} catch(SQLException e) {
-			Log.e("Error", "Failed retrieving new score count.", e);
+			Log.e(Settings.DEBUG_TAG, "Failed retrieving new score count.", e);
 			return -1;
 		} finally {
 			if(c != null)
@@ -416,7 +417,7 @@ public class IIDXModel extends JsonHandler {
 			} else
 				return null;
 		} catch(SQLException e) {
-			Log.e("Error", "Failed retrieving Style from SQLite", e);
+			Log.e(Settings.DEBUG_TAG, "Failed retrieving Style from SQLite", e);
 			return null;
 		} finally {
 			if(c != null)
@@ -441,7 +442,7 @@ public class IIDXModel extends JsonHandler {
 			} else
 				return null;
 		} catch(SQLException e) {
-			Log.e("Error", "Failed retrieving Mode from SQLite", e);
+			Log.e(Settings.DEBUG_TAG, "Failed retrieving Mode from SQLite", e);
 			return null;
 		} finally {
 			if(c != null)
@@ -475,7 +476,7 @@ public class IIDXModel extends JsonHandler {
 					try {
 						scores.put(s.toJSONObject());
 					} catch(JSONException ex) {
-						Log.e("IIDX", "JSONException", ex);
+						Log.e(Settings.DEBUG_TAG, "JSONException", ex);
 					}
 				} while(c.moveToNext());				
 			}
@@ -483,7 +484,7 @@ public class IIDXModel extends JsonHandler {
 			
 			return postDocument(pushAddress, buffer);
 		} catch(SQLException e) {
-			Log.e("Error", "Failed retrieving scores for data push", e);
+			Log.e(Settings.DEBUG_TAG, "Failed retrieving scores for data push", e);
 			return false;
 		} finally {
 			if(c != null)
@@ -525,7 +526,7 @@ public class IIDXModel extends JsonHandler {
 			
 			return new SongQueryAdapter(this.context, R.layout.songlist_layout_item, aa, "title");
 		} catch(SQLException e) {
-			Log.e("Error", "Failed to query Songs from SQLite for search", e);
+			Log.e(Settings.DEBUG_TAG, "Failed to query Songs from SQLite for search", e);
 			return null;
 		} finally {
 			if(c != null)
@@ -548,13 +549,13 @@ public class IIDXModel extends JsonHandler {
 			
 			return result.getBoolean("Result");
 		} catch(ClientProtocolException e) {
-			Log.e("ERROR", "ClientProtocolException", e);
+			Log.e(Settings.DEBUG_TAG, "ClientProtocolException", e);
 			return false;
 		} catch(IOException e) {
-			Log.e("ERROR", "IOException", e);
+			Log.e(Settings.DEBUG_TAG, "IOException", e);
 			return false;
 		} catch(JSONException e) {
-			Log.e("ERROR", "JSONException", e);
+			Log.e(Settings.DEBUG_TAG, "JSONException", e);
 			return false;
 		}
 	}
@@ -564,7 +565,7 @@ public class IIDXModel extends JsonHandler {
 			db = this.context.openOrCreateDatabase(IIDX.DATABASE_NAME, 0, null);
 			return db.isOpen();
 		} catch(SQLException e) {
-			Log.e("Error", "Failed to open IIDX Database", e);
+			Log.e(Settings.DEBUG_TAG, "Failed to open IIDX Database", e);
 			return false;
 		}
 	}

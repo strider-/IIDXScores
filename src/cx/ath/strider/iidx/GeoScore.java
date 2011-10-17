@@ -59,7 +59,7 @@ public class GeoScore implements LocationListener {
 		double lat = arg0.getLatitude();
 		double lon = arg0.getLongitude();
 			
-		Log.i("GPS", String.valueOf(lat) + ", " + String.valueOf(lon));
+		Log.i(Settings.DEBUG_TAG, String.valueOf(lat) + ", " + String.valueOf(lon));
 				
 		try {
 			Geocoder g = new Geocoder(context);
@@ -81,17 +81,17 @@ public class GeoScore implements LocationListener {
 	@Override
 	public void onProviderDisabled(String provider) {
 		loc = null;
-		Log.i("GPS", "Disabled [" + provider + "]");
+		Log.i(Settings.DEBUG_TAG, "Disabled [" + provider + "]");
 	}
 
 	@Override
 	public void onProviderEnabled(String provider) {
-		Log.i("GPS", "Enabled [" + provider + "]");
+		Log.i(Settings.DEBUG_TAG, "Enabled [" + provider + "]");
 	}
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-		Log.i("GPS", "Status changed to " + provider + " [" + String.valueOf(status) + "]");
+		Log.i(Settings.DEBUG_TAG, "Status changed to " + provider + " [" + String.valueOf(status) + "]");
 	}
 	
 	public boolean hasLocation() { return loc != null; }

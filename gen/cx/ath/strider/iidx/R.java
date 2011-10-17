@@ -70,10 +70,12 @@ public final class R {
         public static final int quickcontact_slider_grip_right=0x7f020021;
         public static final int quickcontact_top_frame=0x7f020022;
         public static final int search=0x7f020023;
-        public static final int sym_action_add=0x7f020024;
-        public static final int sym_action_map=0x7f020025;
-        public static final int view_scores=0x7f020026;
-        public static final int widget_frame=0x7f020027;
+        public static final int splash_icon=0x7f020024;
+        public static final int splash_text=0x7f020025;
+        public static final int sym_action_add=0x7f020026;
+        public static final int sym_action_map=0x7f020027;
+        public static final int view_scores=0x7f020028;
+        public static final int widget_frame=0x7f020029;
     }
     public static final class id {
         public static final int actionbar=0x7f0a0008;
@@ -100,13 +102,16 @@ public final class R {
         public static final int llScores=0x7f0a0023;
         public static final int lvScores=0x7f0a0028;
         public static final int lvSongs=0x7f0a000a;
-        public static final int mnuGPS=0x7f0a0032;
-        public static final int preferences=0x7f0a0033;
-        public static final int pull=0x7f0a0030;
-        public static final int push=0x7f0a002f;
+        public static final int mnuGPS=0x7f0a0035;
+        public static final int preferences=0x7f0a0036;
+        public static final int pull=0x7f0a0033;
+        public static final int push=0x7f0a0032;
         public static final int scoreChart=0x7f0a002a;
         public static final int scroll=0x7f0a000d;
-        public static final int selectDJ=0x7f0a0031;
+        public static final int selectDJ=0x7f0a0034;
+        public static final int splash_image=0x7f0a0030;
+        public static final int splash_layout=0x7f0a002f;
+        public static final int splash_text=0x7f0a0031;
         public static final int tbNewScore=0x7f0a0015;
         public static final int title=0x7f0a0001;
         public static final int tracks=0x7f0a000e;
@@ -138,6 +143,7 @@ public final class R {
         public static final int songdetail=0x7f030005;
         public static final int songlist_layout_item=0x7f030006;
         public static final int songlist_separator_item=0x7f030007;
+        public static final int splash=0x7f030008;
     }
     public static final class menu {
         public static final int menu=0x7f090000;

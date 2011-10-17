@@ -131,7 +131,7 @@ public class SongQueryAdapter extends ArrayAdapter<SongQuery> { //implements Sec
 
 	@Override
 	public Object[] getSections() {
-		Log.i("Info", "Got Sections");
+		Log.i(Settings.DEBUG_TAG, "Got Sections");
 		return sections;
 	}
 	*/
